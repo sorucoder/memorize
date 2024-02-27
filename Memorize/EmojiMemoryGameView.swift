@@ -14,11 +14,13 @@ struct EmojiMemoryGameView: View {
         VStack {
             Text("Memorize!")
                 .font(.custom("Veranda", size: 34))
+            Text(game.theme.name)
+            Text("Score: \(game.score)")
             ScrollView {
                 cards.animation(.default, value: game.cards)
             }
-            Button("Shuffle") {
-                game.shuffle()
+            Button("New Game") {
+                game.new()
             }
         }
         .padding()
@@ -35,7 +37,7 @@ struct EmojiMemoryGameView: View {
                     }
             }
         }
-        .foregroundColor(.mint)
+        .foregroundColor(game.theme.color)
     }
 }
 
@@ -68,6 +70,47 @@ struct CardView: View {
 
 struct EmojiMemoryGameView_Previews: PreviewProvider {
     static var previews: some View {
-        EmojiMemoryGameView(game: EmojiMemoryGame())
+        EmojiMemoryGameView(
+            game: EmojiMemoryGame(
+                themes: [
+                    EmojiMemoryGame.Theme(
+                        name: "Halloween",
+                        emojis: ["👻", "🎃", "🕷️", "😈", "💀", "🕸️", "🧙", "🙀", "👹", "😱", "☠️", "🍭"],
+                        numberOfPairsOfCards: 10,
+                        color: .orange
+                    ),
+                    EmojiMemoryGame.Theme(
+                        name: "Food and Drink",
+                        emojis: ["🍇", "🥑", "🍞", "🍙", "🍦", "🥛"],
+                        numberOfPairsOfCards: 4,
+                        color: .yellow
+                    ),
+                    EmojiMemoryGame.Theme(
+                        name: "Animals and Nature",
+                        emojis: ["🐒", "🦃", "🐊", "🐌", "🌸", "🪷", "🌹", "🌺"],
+                        numberOfPairsOfCards: 6,
+                        color: .green
+                    ),
+                    EmojiMemoryGame.Theme(
+                        name: "Sports",
+                        emojis: ["⚽", "⚾", "🏀", "🏐", "🏈", "🎾"],
+                        numberOfPairsOfCards: 5,
+                        color: .red
+                    ),
+                    EmojiMemoryGame.Theme(
+                        name: "Games and Toys",
+                        emojis: ["🎱", "🔫", "🪁", "🪀", "🎮", "🕹️", "🕹️", "🧩"],
+                        numberOfPairsOfCards: 7,
+                        color: .indigo
+                    ),
+                    EmojiMemoryGame.Theme(
+                        name: "Flags",
+                        emojis: ["🇺🇸", "🇦🇷", "🇦🇺", "🇧🇬", "🇧🇴", "🇨🇦", "🇨🇭", "🇩🇪", "🇩🇴", "🇪🇨", "🇪🇸", "🇫🇷", "🇬🇧", "🇬🇷", "🇨🇳"],
+                        numberOfPairsOfCards: 12,
+                        color: .gray
+                    )
+                ]
+            )
+        )
     }
 }
